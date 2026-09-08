@@ -1,10 +1,10 @@
 //your code here
+let input = document.getElementById("input");
 let second = document.getElementById("secondDiv");
 let third = document.getElementById('thirdDiv');
 let fourth = document.getElementById('fourthDiv');
 let fifth = document.getElementById('fifthDiv');
 let sixth = document.getElementById('sixthDiv');
-
 
 second.addEventListener('click', function(e){
      let val = input.value;
@@ -34,65 +34,90 @@ fifth.addEventListener('click', function(e){
 sixth.addEventListener('click', function(e){
     if(e.target.innerHTML == '='){
         let val = String(input.value);
+        console.log(val);
       let res =  calculate(val);
+      //console.log(String(res));
       input.value= String(res);
     }else
      input.value += e.target.innerHTML;
 
 });
 
-
 function calculate (string){
-    let input = string;
-     let op = '';
-     if(input.includes('+')){
-           op = '+';
-     }else if(input.includes('-')){
-           op = '-';
-     }else if(input.includes('*')){
-           op = '*';
-     }else{
-           op = '/';
-     }
-     let n1 = 0;
-     let n2 = 0;
-     for(let i=0;i<input.length; i++){
-          if(input.charAt(i) == op){
-               n1 = Number(input.slice(0,i));
-               n2 = Number(input.slice(i+1, input.length));
-               if(n2==""){
-                 n2 = NaN;
-               }
-               break;
+   let flag = true;
+  
+   while(flag){
+      let op= "";
+     for(let i=0;i<string.length; i++){
+          if(string.charAt(i)=='*' || string.charAt(i)=='/'){
+                op = string.charAt(i);
+                string = Solve(string , op , i);
+                break;
           }
      }
-     let res =0;
-     if(op == '+'){
-       res = add(n1,n2);
-     }else if(op == '-'){
-          res = min(n1,n2);
-     }else if(op == '*'){
-          res = mul(n1,n2);
-     }else{
-       res = div(n1,n2);
+     if(op==""){
+          flag = false;
      }
+   }
 
-     return res;
+   flag = true;
+   while(flag){
+      let op= "";
+     for(let i=0;i<string.length; i++){
+          if(string.charAt(i)=='+' || string.charAt(i)=='-'){
+                op = string.charAt(i);
+                string = Solve(string , op , i);
+          }
+     }
+     if(op==""){
+          flag = false;
+     }
+   }
+   return string;
 }
 
- const add= (n1 , n2)=>{
-     return n1+n2;
+
+function Solve(string , op , indx){
+     console.log(string);
+    let s1 ="";
+    let s2 ="";
+    let n1 ="";
+    let n2 ="";
+
+    for(let i=indx-1; i>=0; i--){
+       if(string.charAt(i)<='9' && string.charAt(i)>='0'){
+          n1+=string.charAt(i);
+       }else{
+          s1 = string.slice(0,i+1);
+          break;
+       }
+    }
+    console.log(n1);
+    console.log(n2);
+    for(let i=indx+1; i<string.length; i++){
+       if(string.charAt(i)<='9'&& string.charAt(i)>='0'){
+          n2+=string.charAt(i);
+       }else{
+          s2 = string.slice(i, string.length);
+          break;
+       }
+    }
+    n1 = n1.split("").reverse().join("");
+    n1 = Number(n1);
+    n2 = Number(n2);
+    let val=0;
+    if(op == '*'){
+      val = n1 * n2;
+    }else if(op == '/'){
+     val = n1/n2;
+    }else if(op=='+'){
+     val = n1+n2;
+    }else{
+     val = n1-n2;
+    }
+
+    let ans = `${s1}${val}${s2}`; console.log(ans);
+    return ans;
 }
 
-function min(n1,n2){
-     return n1-n2;
-}
-function mul(n1,n2){
-     return n1*n2;
-}
-function div(n1,n2){
-     if(n2 == 0) return "Invalid";
-    
-          return n1/n2;
-   
-}
+ 
