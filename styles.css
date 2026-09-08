@@ -1,2 +1,44 @@
 
 /* Your CSS Code here. */
+#main{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    height: 80vh;
+    width: 200px;
+    border: 1px solid lightslategray;
+
+}
+#input{
+      width: 96%;
+      height: 89%;
+}
+
+#secondDiv{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    
+}
+
+#thirdDiv{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+#fourthDiv{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    
+}
+#fifthDiv{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    
+}
+
+#sixthDiv{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    
+}
+
