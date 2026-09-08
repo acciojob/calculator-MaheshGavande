@@ -109,7 +109,9 @@ function Solve(string , op , indx){
     if(op == '*'){
       val = n1 * n2;
     }else if(op == '/'){
-     val = n1/n2;
+     if(n1==0 && n2==0) {return NaN;}
+     else if(n2==0) { return "Infinity"}
+     else{ val = n1/n2;  }
     }else if(op=='+'){
      val = n1+n2;
     }else{
